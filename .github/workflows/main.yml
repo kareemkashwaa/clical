@@ -16,5 +16,9 @@ jobs:
         run: poetry install
       - name: run tests
         run: poetry run pytest
-       
+      - name: build
+        run: poetry build
+      - name: upload artifacts
+        uses: actions/upload-artifacts@v4
+        path: dist/*.whl
     
