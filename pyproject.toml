@@ -6,7 +6,7 @@ authors = ["kk <k@kashwaa.dev>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.10"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.2.2"
