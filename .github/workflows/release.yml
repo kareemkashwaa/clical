@@ -1,0 +1,30 @@
+name: Run tests
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install poetry
+        run: pip install poetry
+        
+      - name: checkout
+        uses: actions/checkout@v2
+        
+      - name: insall dependencies
+        run: poetry install
+        
+      - name: run tests
+        run: poetry run pytest
+        
+      - name: build
+        run: poetry build
+        
+      - name: release
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ github.ref }}
+        run: |
+          gh release create $TAG --title "Release $TAG" --generate-notes
