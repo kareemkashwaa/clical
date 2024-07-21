@@ -25,9 +25,16 @@ jobs:
       - name: build
         run: poetry build
         
-      - name: release
+      - name: create release
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAG: ${{ github.ref }}
         run: |
           gh release create $TAG --title "Release $TAG" --generate-notes
+      
+      - name: upload release
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ github.ref }}
+        run: gh release upload $TAG ./dist/*.whl
+
